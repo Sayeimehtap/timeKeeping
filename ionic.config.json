@@ -1,0 +1,7 @@
+{
+  "name": "timeKeeping",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
