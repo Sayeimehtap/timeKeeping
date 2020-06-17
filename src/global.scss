@@ -9,18 +9,44 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+
 /* Core CSS required for Ionic components to work properly */
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
+
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
+
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+.picker-toolbar.sc-ion-picker-ios {
+    border-bottom: 0;
+}
+
+.picker-wrapper.sc-ion-picker-ios {
+    border-top: 0;
+}
+
+.picker-wrapper.sc-ion-picker-ios {
+    background: #2b2b2b;
+}
+
+.picker-aboce-highlight.sc-icon-picker-ios,
+.picker-below-highlight.sc-ion-picker-ios {
+    background: rgba(0, 0, 0, .5);
+    border: none;
+}
+
+.picker-opt {
+    color: white;
+}
