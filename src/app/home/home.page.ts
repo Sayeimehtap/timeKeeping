@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ export class HomePage {
   percent: number = 0;
   radius: number = 100;
 
-  fullTime: any = '00:01:30';
+  fullTime: any = '00:00:10';
   overallTimer: any = false;
 
   timer: any = false;
@@ -18,11 +19,16 @@ export class HomePage {
   progress: any = 0;
   minutes: number = 1;
   seconds: any = 30;
+  paused: any = false;
 
   elapsed: any = {
     h: '00',
     m: '00',
     s: '00',
+  }
+
+  constructor(private imsomnia: Insomnia){
+
   }
 
   startTime() {
@@ -49,19 +55,15 @@ export class HomePage {
 
       this.incValue = 1 / totalSeconds;
 
-      if(this.progress == this.radius) {
-        this.elapsed = {
-          h: '00',
-          m: '00',
-          s: '00',
-        }
+      if(this.progress >= this.radius) {
         this.stopTime();
         clearInterval(this.timer);
       }
 
+      if(!this.paused){
+        this.progress = this.progress + this.incValue;
+      }
 
-      this.percent = Math.floor((this.progress / totalSeconds) * 100);
-      this.progress = this.progress + this.incValue;
     }, 10)
   }
 
@@ -69,12 +71,15 @@ export class HomePage {
     let countDownDate = new Date();
 
     this.overallTimer = setInterval(() => {
-      let now = new Date().getTime();
-      let distance = now - countDownDate.getTime();
 
-      this.elapsed.h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      this.elapsed.m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      this.elapsed.s = Math.floor((distance % (1000 * 60)) / (1000));
+      if(!this.paused){
+        let now = new Date().getTime();
+        let distance = now - countDownDate.getTime();
+
+        this.elapsed.h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        this.elapsed.m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        this.elapsed.s = Math.floor((distance % (1000 * 60)) / (1000));
+      }
 
       this.elapsed.h = this.pad(this.elapsed.h, 2);
       this.elapsed.m = this.pad(this.elapsed.m, 2);
@@ -90,18 +95,13 @@ export class HomePage {
   }
 
   stopTime(){
-    clearInterval(this.timer);
-    clearInterval(this.overallTimer);
-    this.overallTimer = false;
+    this.paused = true;
     this.timer = false;
-    this.percent = 0;
-    this.progress = 0;
-    this.incValue = 0;
-    this.elapsed = {
-      h: '00',
-      m: '00',
-      s: '00',
-    }
+    this.calculateRemainingTime();
+  }
+
+  calculateRemainingTime() {
+    
   }
 
 }

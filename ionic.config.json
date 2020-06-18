@@ -1,7 +1,8 @@
 {
   "name": "timeKeeping",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
