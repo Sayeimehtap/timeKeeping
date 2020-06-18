@@ -1,79 +1,88 @@
-<ion-content fullscreen>
+<ion-content>
 
-    <ion-card>
-        <ion-card-header color="white">
-            <ion-card-title>
-                Ayarlanan Zaman
-            </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-datetime displayFormat="hh:mm:ss" placeholder="Tıkla" [(ngModel)]="fullTime"></ion-datetime>
+    <ion-grid>
+        <ion-row class="b">
+            <ion-col>
+                <ion-card>
+                    <ion-card-header color="white">
+                        <ion-card-title>
+                            Ayarlanan Zaman
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-datetime displayFormat="hh:mm:ss" placeholder="Tıkla" [(ngModel)]="fullTime"></ion-datetime>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row class="a">
+            <ion-col>
+                <ion-card>
+                    <ion-card-header color="white">
+                        <ion-card-title>
+                            Durum
+                        </ion-card-title>
+                    </ion-card-header>
 
-        </ion-card-content>
-    </ion-card>
+                    <ion-card-content>
+                        <circle-progress [titleColor]="'#565656'" [unitsColor]="'#565656'" [titleFontSize]="35" [unitsFontSize]="20" [title]="title" [percent]="progress" [maxPercent]="100" [radius]="radius" [outerStrokeWidth]="11" [outerStrokeColor]="'#138D75'" [showZeroOuterStroke]="false"
+                            [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#267AA9'" [innerStrokeWidth]="11" [innerStrokeColor]="'#f1f1f1'"></circle-progress>
 
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>
+                                    <div class="button-left">
+                                        <ion-button>
+                                            <ion-icon slot="icon-only" name="arrow-undo"></ion-icon>
+                                        </ion-button>
+                                    </div>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <div class="button-center">
+                                        <ion-fab horizontal="center">
+                                            <ng-container *ngIf="timer1 == false; else running">
+                                                <ion-fab-button (click)="startTime()">
+                                                    <ion-icon name="play"></ion-icon>
+                                                </ion-fab-button>
+                                            </ng-container>
+                                            <ng-template #running>
+                                                <ion-fab-button (click)="stopTime()">
+                                                    <ion-icon name="square"></ion-icon>
+                                                </ion-fab-button>
+                                            </ng-template>
+                                        </ion-fab>
+                                    </div>
+                                </ion-col>
+                                <ion-col>
+                                    <div class="button-right">
+                                        <ion-button>
+                                            <ion-icon slot="icon-only" name="musical-notes"></ion-icon>
+                                        </ion-button>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
 
-    <ion-card>
-        <ion-card-header color="white">
-            <ion-card-title>
-                Durum
-            </ion-card-title>
-        </ion-card-header>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row class="b">
+            <ion-col>
+                <ion-card>
+                    <ion-card-header color="white">
+                        <ion-card-title>Geçen Zaman</ion-card-title>
+                    </ion-card-header>
 
-        <ion-card-content>
-            <circle-progress [titleColor]="'#565656'" [unitsColor]="'#565656'" [titleFontSize]="35" [unitsFontSize]="20" [title]="title" [percent]="progress" [maxPercent]="100" [radius]="radius" [outerStrokeWidth]="11" [outerStrokeColor]="'#138D75'" [showZeroOuterStroke]="false"
-                [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#267AA9'" [innerStrokeWidth]="11" [innerStrokeColor]="'#f1f1f1'"></circle-progress>
+                    <ion-card-content>
+                        <p>
+                            {{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}
+                        </p>
+                    </ion-card-content>
 
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <div class="button-left">
-                            <ion-button>
-                                <ion-icon slot="icon-only" name="arrow-undo"></ion-icon>
-                            </ion-button>
-                        </div>
-                    </ion-col>
-                    <ion-col size="3">
-                        <div class="button-center">
-                            <ion-fab horizontal="center">
-                                <ng-container *ngIf="timer1 == false; else running">
-                                    <ion-fab-button (click)="startTime()">
-                                        <ion-icon name="play"></ion-icon>
-                                    </ion-fab-button>
-                                </ng-container>
-                                <ng-template #running>
-                                    <ion-fab-button (click)="stopTime()">
-                                        <ion-icon name="square"></ion-icon>
-                                    </ion-fab-button>
-                                </ng-template>
-                            </ion-fab>
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div class="button-right">
-                            <ion-button>
-                                <ion-icon slot="icon-only" name="musical-notes"></ion-icon>
-                            </ion-button>
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-        </ion-card-content>
-    </ion-card>
-
-
-    <ion-card>
-        <ion-card-header color="white">
-            <ion-card-title>Geçen Zaman</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-            <p>
-                {{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}
-            </p>
-        </ion-card-content>
-
-    </ion-card>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

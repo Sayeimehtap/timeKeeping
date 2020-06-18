@@ -1,5 +1,5 @@
 p {
-    font-size: 2.5em;
+    font-size: 2.3em;
     color: #565656;
     width: 100%;
     text-align: center;
@@ -7,6 +7,7 @@ p {
 
 ion-card {
     background-color: #fff;
+    margin: 0.2rem;
 }
 
 ion-card-header {
@@ -21,11 +22,11 @@ ion-card-title {
 }
 
 ion-card-content {
-    padding: 1rem;
+    padding: 0.3rem;
 }
 
 ion-datetime {
-    font-size: 2.5em;
+    font-size: 2.3em;
     color: #565656;
     width: 100%;
     text-align: center;
@@ -45,4 +46,14 @@ circle-progress {
 
 .button-right {
     text-align: left;
+}
+
+ion-grid {
+    height: 100%;
+    ion-row a {
+        height: 68%;
+    }
+    ion-row b {
+        height: 16%;
+    }
 }
