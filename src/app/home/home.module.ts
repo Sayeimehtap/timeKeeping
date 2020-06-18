@@ -16,15 +16,13 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HomePageRoutingModule,
 
     NgCircleProgressModule.forRoot({
-      "space": 0,
-      "imageSrc": "assets/notification.svg",
-      "imageHeight": 154,
-      "imageWidth": 154,
+      "space": -11,
       "showImage": false,
       "showUnits": true,
+      "showSubtitle": false,
       "showBackground": true,
       "responsive": true,
-      "animation": false
+      "animation": false,
     })
   ],
   declarations: [HomePage]

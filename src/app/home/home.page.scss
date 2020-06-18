@@ -1,6 +1,48 @@
 p {
-    font-size: 3em;
+    font-size: 2.5em;
     color: #565656;
     width: 100%;
     text-align: center;
+}
+
+ion-card {
+    background-color: #fff;
+}
+
+ion-card-header {
+    color: #fff;
+    background-color: #138D75;
+    width: 100%;
+    text-align: center;
+}
+
+ion-card-title {
+    font-size: 1.1em;
+}
+
+ion-card-content {
+    padding: 1rem;
+}
+
+ion-datetime {
+    font-size: 2.5em;
+    color: #565656;
+    width: 100%;
+    text-align: center;
+}
+
+circle-progress {
+    text-align: center;
+}
+
+.button-left {
+    text-align: right;
+}
+
+.button-center {
+    text-align: center;
+}
+
+.button-right {
+    text-align: left;
 }
