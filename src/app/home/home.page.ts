@@ -72,17 +72,14 @@ export class HomePage {
           this.elapsed.h = Math.floor((milisec % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           this.elapsed.m = Math.floor((milisec % (1000 * 60 * 60)) / (1000 * 60));
           this.elapsed.s = Math.floor((milisec % (1000 * 60)) / (1000));
-  
-          this.elapsed.sa = Math.floor(milisec % 1000);
-  
+    
         }
   
         this.elapsed.h = this.pad(this.elapsed.h, 2);
         this.elapsed.m = this.pad(this.elapsed.m, 2);
         this.elapsed.s = this.pad(this.elapsed.s, 2);
-        this.elapsed.sa = this.pad(this.elapsed.sa, 3);
 
-      }, 10)
+      }, 500)
 
     }
   }
