@@ -22,7 +22,6 @@ export class HomePage {
   paused: any = true;
   delayDistance: any = 0;
   totalSeconds: any = 0;
-  sleepingTime: any = 0;
   time = new Date();
 
   elapsed: any = {
@@ -34,7 +33,6 @@ export class HomePage {
   startTime() {
 
     this.paused = false;
-    clearInterval(this.timerDelay);
     this.time = new Date();
 
     if (!this.doesItContinue) {
@@ -95,10 +93,7 @@ export class HomePage {
   }
 
   resetTime() {
-    this.doesItContinue = false;
-    this.paused = true;
-    clearInterval(this.timerProgress);
-    clearInterval(this.timerCounter);
+    this.finishTime();
 
     this.delayDistance = 0;
     this.progress = 0;
@@ -114,7 +109,6 @@ export class HomePage {
     this.paused = true;
     clearInterval(this.timerProgress);
     clearInterval(this.timerCounter);
-
     this.doesItContinue = false;
   }
 
