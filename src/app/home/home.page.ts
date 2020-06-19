@@ -11,10 +11,10 @@ export class HomePage {
   radius: number = 100;
 
   fullTime: any = '00:00:10';
-  overallTimer1: any = false;
+  overallTimerB: any = false;
   overallTimer: any = false;
 
-  timer1: any = false;
+  timerB: any = false;
   timer: any = false;
 
   incValue: any = 0;
@@ -22,7 +22,6 @@ export class HomePage {
   minutes: number = 0;
   seconds: any = 0;
   paused: any = false;
-  finished: any = false;
   totalSeconds: any = 0;
   sleepingTime: any = 0;
 
@@ -34,26 +33,13 @@ export class HomePage {
 
   startTime() {
 
-    if(this.finished){
-      this.finished = false;
-
-      this.progress = 0;
-      this.elapsed = {
-        h: '00',
-        m: '00',
-        s: '00',
-      }
-
-      console.log("tekrar başlatıldı");
-    }
-
-    if(!this.timer1){
+    if(!this.timerB){
       
       this.paused = false;
 
       console.log("girdi");
 
-      this.timer1 = false;
+      this.timerB = false;
   
       let timeSplit = this.fullTime.split(':');
       this.minutes = timeSplit[1];
@@ -63,7 +49,7 @@ export class HomePage {
 
     }
 
-    if(!this.overallTimer1){
+    if(!this.overallTimerB){
       console.log("sayac basladı")
       this.progressTimer();
     }
@@ -116,17 +102,26 @@ export class HomePage {
     this.paused = true;
     let countDownDate = new Date();
     console.log(countDownDate.getTime());
-    this.timer1 = false;
+    this.timerB = false;
     this.calculateRemainingTime(countDownDate);
   }
   
   resetTime(){
     this.paused = true;
-    this.finished = true;
-    this.timer1 = false;
-    this.overallTimer1 = false;
+    this.timerB = false;
+    this.overallTimerB = false;
     clearInterval(this.timer);
     clearInterval(this.overallTimer);
+
+      this.progress = 0;
+      this.elapsed = {
+        h: '00',
+        m: '00',
+        s: '00',
+      }
+
+      console.log("durduruldu");
+    
   }
 
   calculateRemainingTime(paramCountDownDate) {
