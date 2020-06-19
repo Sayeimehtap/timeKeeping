@@ -33,24 +33,32 @@ ion-content {
     font-family: Montserrat;
 }
 
-.picker-toolbar.sc-ion-picker-ios {
-    border-bottom: 0;
+.picker-columns,
+.picker-toolbar,
+.picker-md .picker-wrapper,
+.picker-md .picker-toolbar {
+    //background: map-get($colors,primary-dark);
+    background-color: #f1f1f1;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-.picker-wrapper.sc-ion-picker-ios {
-    border-top: 0;
+.picker-md .picker-prefix,
+.picker-md .picker-suffix,
+.picker-md .picker-opt.picker-opt-selected {
+    color: #000;
+    font-family: Montserrat-Medium;
 }
 
-.picker-wrapper.sc-ion-picker-ios {
-    background: #2b2b2b;
+.picker-md .picker-opt {
+    color: #565656;
+    font-family: Montserrat-Light;
 }
 
-.picker-aboce-highlight.sc-icon-picker-ios,
-.picker-below-highlight.sc-ion-picker-ios {
-    background: rgba(0, 0, 0, .5);
-    border: none;
-}
-
-.picker-opt {
-    color: white;
+.picker-md .picker-button,
+.picker-md .picker-button.activated {
+    color: #138D75;
+    font-family: Montserrat-Regular;
 }
