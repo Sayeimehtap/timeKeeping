@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Insomnia } from '@ionic-native/insomnia/ngx';
 
 @Component({
   selector: 'app-home',
@@ -10,20 +9,22 @@ export class HomePage {
 
   radius: number = 100;
 
-  fullTime: any = '00:00:10';
-  overallTimerB: any = false;
-  overallTimer: any = false;
-
-  timerB: any = false;
-  timer: any = false;
+  fullTime: any = '00:01:30';
+  timerCounter: any = false;
+  timerDelay: any = false;
+  doesItContinue: any = false;
+  timerProgress: any = false;
 
   incValue: any = 0;
   progress: any = 0;
+  hours: number = 0;
   minutes: number = 0;
   seconds: any = 0;
-  paused: any = false;
+  paused: any = true;
+  delayDistance: any = 0;
   totalSeconds: any = 0;
   sleepingTime: any = 0;
+  time = new Date();
 
   elapsed: any = {
     h: '00',
@@ -33,63 +34,57 @@ export class HomePage {
 
   startTime() {
 
-    if(!this.timerB){
-      
-      this.paused = false;
+    this.paused = false;
+    clearInterval(this.timerDelay);
+    this.time = new Date();
 
-      console.log("girdi");
+    if(!this.doesItContinue){
 
-      this.timerB = false;
-  
+      this.doesItContinue = true;
+
       let timeSplit = this.fullTime.split(':');
+      this.hours = timeSplit[0];
       this.minutes = timeSplit[1];
       this.seconds = timeSplit[2];
   
-      this.totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
+      this.totalSeconds = Math.floor(this.hours * 60 * 60) + Math.floor(this.minutes * 60) + parseInt(this.seconds);
 
-    }
-
-    if(!this.overallTimerB){
-      console.log("sayac basladı")
-      this.progressTimer();
-    }
-
+      this.timerProgress = setInterval(() => {
+        
+        this.incValue = 1 / this.totalSeconds;
   
-    this.timer = setInterval(() => {
+        if(this.progress >= this.radius) {
+          this.finishTime()
+        }
 
-      this.incValue = 1 / this.totalSeconds;
+        if(!this.paused){
+          this.progress = this.progress + this.incValue;
+        }
+  
+      }, 10)
 
-      if(this.progress >= this.radius) {
-        this.resetTime();
-      }
+      this.timerCounter = setInterval(() => {
 
-      if(!this.paused){
-        this.progress = this.progress + this.incValue;
-      }
+        if(!this.paused){
+          let milisec = this.delayDistance + (new Date()).getTime() - this.time.getTime();
 
-    }, 10)
-  }
 
-  progressTimer() {
-    let countDownDate = new Date();
-    this.overallTimer = setInterval(() => {
+          this.elapsed.h = Math.floor((milisec % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          this.elapsed.m = Math.floor((milisec % (1000 * 60 * 60)) / (1000 * 60));
+          this.elapsed.s = Math.floor((milisec % (1000 * 60)) / (1000));
+  
+          this.elapsed.sa = Math.floor(milisec % 1000);
+  
+        }
+  
+        this.elapsed.h = this.pad(this.elapsed.h, 2);
+        this.elapsed.m = this.pad(this.elapsed.m, 2);
+        this.elapsed.s = this.pad(this.elapsed.s, 2);
+        this.elapsed.sa = this.pad(this.elapsed.sa, 3);
 
-      if(!this.paused){
-        let now = new Date().getTime();
-        let distance = now - countDownDate.getTime();
+      }, 10)
 
-        this.elapsed.h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        this.elapsed.m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        this.elapsed.s = Math.floor((distance % (1000 * 60)) / (1000));
-
-        console.log(this.elapsed.h+":"+this.elapsed.m+":"+this.elapsed.s)
-      }
-
-      this.elapsed.h = this.pad(this.elapsed.h, 2);
-      this.elapsed.m = this.pad(this.elapsed.m, 2);
-      this.elapsed.s = this.pad(this.elapsed.s, 2);
-
-    }, 1000)
+    }
   }
 
   pad(num, size) {
@@ -100,18 +95,15 @@ export class HomePage {
 
   stopTime(){
     this.paused = true;
-    let countDownDate = new Date();
-    console.log(countDownDate.getTime());
-    this.timerB = false;
-    this.calculateRemainingTime(countDownDate);
+    this.delayDistance += (new Date()).getTime() - this.time.getTime();
   }
   
   resetTime(){
+    this.doesItContinue = false;
     this.paused = true;
-    this.timerB = false;
-    this.overallTimerB = false;
-    clearInterval(this.timer);
-    clearInterval(this.overallTimer);
+    clearInterval(this.timerProgress);
+    clearInterval(this.timerCounter);
+    clearInterval(this.timerDelay);
 
       this.progress = 0;
       this.elapsed = {
@@ -119,16 +111,15 @@ export class HomePage {
         m: '00',
         s: '00',
       }
-
-      console.log("durduruldu");
     
   }
 
-  calculateRemainingTime(paramCountDownDate) {
-    let now = new Date().getTime();
-    console.log(paramCountDownDate.getTime());
-    this.sleepingTime = now - paramCountDownDate.getTime();
-    console.log(this.sleepingTime);
+  finishTime() {
+    this.paused = true;
+    clearInterval(this.timerProgress);
+    clearInterval(this.timerCounter);
+
+    this.doesItContinue = false;
   }
 
 }

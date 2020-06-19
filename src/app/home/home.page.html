@@ -10,7 +10,7 @@
                         </ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-datetime displayFormat="hh:mm:ss" placeholder="Tıkla" [(ngModel)]="fullTime"></ion-datetime>
+                        <ion-datetime displayFormat="HH:mm:ss" placeholder="Tıkla" [(ngModel)]="fullTime"></ion-datetime>
                     </ion-card-content>
                 </ion-card>
             </ion-col>
@@ -39,18 +39,16 @@
                                 </ion-col>
                                 <ion-col size="3">
                                     <div class="button-center">
-                                        <ion-fab horizontal="center">
-                                            <ng-container *ngIf="timerB == false; else running">
-                                                <ion-fab-button (click)="startTime()">
-                                                    <ion-icon name="play"></ion-icon>
-                                                </ion-fab-button>
-                                            </ng-container>
-                                            <ng-template #running>
-                                                <ion-fab-button (click)="stopTime()">
-                                                    <ion-icon name="pause"></ion-icon>
-                                                </ion-fab-button>
-                                            </ng-template>
-                                        </ion-fab>
+                                        <ng-container *ngIf="paused == true; else running">
+                                            <ion-button size="large" (click)="startTime()">
+                                                <ion-icon name="play"></ion-icon>
+                                            </ion-button>
+                                        </ng-container>
+                                        <ng-template #running>
+                                            <ion-button size="large" (click)="stopTime()">
+                                                <ion-icon name="pause"></ion-icon>
+                                            </ion-button>
+                                        </ng-template>
                                     </div>
                                 </ion-col>
                                 <ion-col>
@@ -76,7 +74,7 @@
 
                     <ion-card-content>
                         <p>
-                            {{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}
+                            {{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}:{{ elapsed.sa }}
                         </p>
                     </ion-card-content>
 
