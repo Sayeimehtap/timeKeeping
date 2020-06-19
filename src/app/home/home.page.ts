@@ -11,7 +11,6 @@ export class HomePage {
 
   fullTime: any = '00:01:30';
   timerCounter: any = false;
-  timerDelay: any = false;
   doesItContinue: any = false;
   timerProgress: any = false;
 
@@ -38,7 +37,7 @@ export class HomePage {
     clearInterval(this.timerDelay);
     this.time = new Date();
 
-    if(!this.doesItContinue){
+    if (!this.doesItContinue) {
 
       this.doesItContinue = true;
 
@@ -46,35 +45,35 @@ export class HomePage {
       this.hours = timeSplit[0];
       this.minutes = timeSplit[1];
       this.seconds = timeSplit[2];
-  
+
       this.totalSeconds = Math.floor(this.hours * 60 * 60) + Math.floor(this.minutes * 60) + parseInt(this.seconds);
 
       this.timerProgress = setInterval(() => {
-        
+
         this.incValue = 1 / this.totalSeconds;
-  
-        if(this.progress >= this.radius) {
+
+        if (this.progress >= this.radius) {
           this.finishTime()
         }
 
-        if(!this.paused){
+        if (!this.paused) {
           this.progress = this.progress + this.incValue;
         }
-  
+
       }, 10)
 
       this.timerCounter = setInterval(() => {
 
-        if(!this.paused){
+        if (!this.paused) {
           let milisec = this.delayDistance + (new Date()).getTime() - this.time.getTime();
 
 
           this.elapsed.h = Math.floor((milisec % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           this.elapsed.m = Math.floor((milisec % (1000 * 60 * 60)) / (1000 * 60));
           this.elapsed.s = Math.floor((milisec % (1000 * 60)) / (1000));
-    
+
         }
-  
+
         this.elapsed.h = this.pad(this.elapsed.h, 2);
         this.elapsed.m = this.pad(this.elapsed.m, 2);
         this.elapsed.s = this.pad(this.elapsed.s, 2);
@@ -90,25 +89,25 @@ export class HomePage {
     return s;
   }
 
-  stopTime(){
+  stopTime() {
     this.paused = true;
     this.delayDistance += (new Date()).getTime() - this.time.getTime();
   }
-  
-  resetTime(){
+
+  resetTime() {
     this.doesItContinue = false;
     this.paused = true;
     clearInterval(this.timerProgress);
     clearInterval(this.timerCounter);
-    clearInterval(this.timerDelay);
 
-      this.progress = 0;
-      this.elapsed = {
-        h: '00',
-        m: '00',
-        s: '00',
-      }
-    
+    this.delayDistance = 0;
+    this.progress = 0;
+    this.elapsed = {
+      h: '00',
+      m: '00',
+      s: '00',
+    }
+
   }
 
   finishTime() {
